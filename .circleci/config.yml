@@ -1,0 +1,121 @@
+defaults: &defaults
+  working_directory: ~/code
+  docker:
+    - image: cimg/node:14.18.3
+version: 2
+jobs:
+  checkout_code:
+    <<: *defaults
+    steps:
+      - restore_cache:
+          keys:
+            - source-{{ .Branch }}-{{ .Revision }}
+            - source-{{ .Branch }}-
+            - source-
+
+      - checkout
+
+      - save_cache:
+          key: source-{{ .Branch }}-{{ .Revision }}
+          paths:
+            - "~/code"
+  install:
+    <<: *defaults
+    steps:
+      - restore_cache:
+          key: source-{{ .Branch }}-{{ .Revision }}
+      - restore_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+      - restore_cache:
+          key: dependency-cache-{{ checksum "backend/package.json" }}
+      - restore_cache:
+          key: dependency-cache-{{ checksum "frontend/package.json" }}
+      - run:
+          name: "Install root"
+          working_directory: ~/code
+          command: |
+            # Note: add your necessary environment variables at app.circleci.com
+            sudo apt-get update && sudo apt-get install -y python3-pip 
+            sudo pip install awscli
+            sudo npm i -g serverless
+            npm ci
+      - run:
+          name: "Install backend"
+          working_directory: ~/code/backend
+          command: |
+            chmod +x clean_db.sh
+            npm ci
+      - run:
+          name: "Install frontend"
+          working_directory: ~/code/frontend
+          command: npm ci
+      - save_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+          paths:
+            - node_modules
+      - save_cache:
+          key: dependency-cache-{{ checksum "backend/package.json" }}
+          paths:
+            - backend/node_modules
+      - save_cache:
+          key: dependency-cache-{{ checksum "frontend/package.json" }}
+          paths:
+            - frontend/node_modules
+  test:
+    <<: *defaults
+    steps:
+      - restore_cache:
+          key: source-{{ .Branch }}-{{ .Revision }}
+      - restore_cache:
+          key: dependency-cache-{{ checksum "backend/package.json" }}
+      - restore_cache:
+          key: dependency-cache-{{ checksum "frontend/package.json" }}
+      - run:
+          name: "Backend Test"
+          working_directory: ~/code/backend
+          command: npm run test
+      - run:
+          name: "Frontend Test"
+          working_directory: ~/code/frontend
+          command: npm run test
+  build:
+    <<: *defaults
+    steps:
+      - restore_cache:
+          key: source-{{ .Branch }}-{{ .Revision }}
+      - restore_cache:
+          key: dependency-cache-{{ checksum "frontend/package.json" }}
+      - run:
+          name: "Build app"
+          working_directory: ~/code/frontend
+          command: npm run build
+      - persist_to_workspace:
+          root: ~/code
+          paths:
+            - backend/package.json
+            - frontend/build
+            - frontend/package.json
+  deploy:
+    <<: *defaults
+    steps:
+      - attach_workspace:
+          at: ~/code
+      - run: npm run deploy
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - checkout_code
+      - install:
+          requires:
+            - checkout_code
+      - test:
+          requires:
+            - install
+      - build:
+          requires:
+            - install
+      - deploy:
+          requires:
+            - test
+            - build
