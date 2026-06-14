@@ -30,7 +30,7 @@ const initGqlServer = async (app) => {
     app,
     path: '/api/graphql',
     cors: true,
-    bodyParserConfig: true,
+    bodyParserConfig: false,
   };
   server.applyMiddleware(apolloRegistration);
 };

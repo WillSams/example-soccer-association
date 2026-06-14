@@ -20,7 +20,7 @@ The below are optional but highly recommended:
 
 * [nvm](https://github.com/nvm-sh/nvm) - Used to manage NodeJS versions.
 * [Direnv](https://direnv.net/) - Used to manage environment variables.
-- Install [direnv](https://direnv.net) for persisting environment variables needed for development.
+  * Install [direnv](https://direnv.net) for persisting environment variables needed for development.
 
 ## Getting Started
 
