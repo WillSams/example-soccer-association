@@ -20,7 +20,6 @@ aws dynamodb create-table \
         AttributeName=Id,AttributeType=S \
         AttributeName=Metadata,AttributeType=S \
         AttributeName=GameDay,AttributeType=S \
-        AttributeName=TeamName,AttributeType=S \
         AttributeName=PlayerName,AttributeType=S \
     --key-schema \
         AttributeName=Id,KeyType=HASH \

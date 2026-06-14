@@ -143,5 +143,6 @@ serverless.yml
 .pnp.*
 
 test-results/
+claude/
 
 TODO
