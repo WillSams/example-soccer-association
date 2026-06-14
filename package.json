@@ -16,7 +16,7 @@
     "concurrently": "^6.5.1"
   },
   "devDependencies": {
-    "eslint": "^7.26.0",
+    "eslint": "^10.5.0",
     "husky": "^6.0.0",
     "prettier": "^2.5.1",
     "dynamodb-admin": "^5.1.3"
