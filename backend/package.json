@@ -10,7 +10,7 @@
     "apollo-server-express": "^3.6.1",
     "aws-sdk": "^2.1054.0",
     "bcrypt": "^6.0.0",
-    "body-parser": "^2.2.2",
+    "body-parser": "^2.3.0",
     "cors": "^2.8.5",
     "express": "^5.2.1",
     "graphql": "^16.14.2",
