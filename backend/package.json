@@ -13,7 +13,7 @@
     "body-parser": "^2.3.0",
     "cors": "^2.8.5",
     "express": "^5.2.1",
-    "graphql": "^17.0.1",
+    "graphql": "^17.0.2",
     "jsonwebtoken": "^9.0.2",
     "moment": "^2.29.1",
     "uuid": "^14.0.1"
