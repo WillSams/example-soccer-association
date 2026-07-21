@@ -62,7 +62,7 @@
     "html-webpack-plugin": "^5.5.0",
     "jest": "^30.4.2",
     "jest-environment-jsdom": "^30.4.1",
-    "jest-environment-jsdom-global": "^3.0.0",
+    "jest-environment-jsdom-global": "^4.0.0",
     "redux-saga-test-plan": "^4.0.4",
     "style-loader": "^3.3.1",
     "webpack": "^5.107.2",
