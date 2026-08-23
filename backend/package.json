@@ -16,7 +16,7 @@
     "graphql": "^17.0.2",
     "jsonwebtoken": "^9.0.2",
     "moment": "^2.29.1",
-    "uuid": "^14.0.1"
+    "uuid": "^14.0.2"
   },
   "scripts": {
     "dev": "./node_modules/nodemon/bin/nodemon.js main.js",
