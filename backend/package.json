@@ -15,7 +15,7 @@
     "express": "^5.2.1",
     "graphql": "^17.0.2",
     "jsonwebtoken": "^9.0.2",
-    "moment": "^2.29.1",
+    "moment": "^2.31.0",
     "uuid": "^14.0.2"
   },
   "scripts": {
