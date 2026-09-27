@@ -33,7 +33,7 @@
     "@babel/preset-env": "^8.0.6",
     "@types/jest": "^30.0.0",
     "babel-jest": "^30.5.2",
-    "eslint": "^10.10.0",
+    "eslint": "^10.11.0",
     "faker": "^6.6.6",
     "jest": "^30.5.2",
     "jest-mock": "^30.4.1",
